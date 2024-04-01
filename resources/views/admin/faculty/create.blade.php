@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('facultys.store') }}" method="post">@csrf
+            <form action="{{ route('facultys.store') }}" method="post" class="row g-3 needs-validation" novalidate>@csrf
                 <div class="card">
                     <div class="card-header">{{ __('Create New Faculty') }}</div>
 
@@ -19,19 +19,18 @@
                         
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="name" class="form-control">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="validationCustom02" required>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="mt-4">
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea placeholder="" id="description" class="form-control" name="description" rows="6" required></textarea>
-
-                                @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <textarea placeholder="" id="description" class="form-control" name="description" rows="6"></textarea>
                             </div>
                         </div>
 

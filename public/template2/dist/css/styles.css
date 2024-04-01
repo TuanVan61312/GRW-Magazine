@@ -10,6 +10,16 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+
+
+/* Bổ sung một số điều chỉnh cho hover */
+.relative:hover {
+  background-color: #f0f0f0;
+  border-color: #d4d4d4;
+}
+
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

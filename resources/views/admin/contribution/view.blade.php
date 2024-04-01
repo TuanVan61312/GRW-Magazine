@@ -5,8 +5,11 @@
         <div class="row">
             <div class="col-md-11 ms-5">
                 <div class="col-md-12">
-                    <div class="alert alert-secondary">
-                        Contribution List
+                    <div class="alert alert-secondary d-flex justify-content-between align-items-center" role="alert">
+                        <h4 class="alert-heading">Contribution List</h4>
+                        <a href="{{ route('contributions.create') }}"  type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 1.5rem; --bs-btn-font-size: .75rem;">
+                            Add Contribution
+                        </a>
                     </div>
                     @if (Session::has('success'))
                         <div class="alert alert-success">
@@ -19,11 +22,11 @@
                             <tr>
                                 <th>ID</th>
                                 <th>User</th>
-                                <th>Faculty</th>
-								<th>Title</th>
+                                <th>Title</th>
 								<th>Description</th>
 								<th>File</th>
 								<th>Submitted on</th>
+								<th>Faculty</th>
                                 <th>Event</th>                               
                                 <th>Delete</th>
                                 <th>Edit</th>
@@ -37,11 +40,11 @@
                                     <tr>
                                         <td> {{ $key + 1 }} </td>
                                         <td> {{ $con->user->name ?? '' }} </td>
-                                        <td> {{ $con->faculty->name ?? '' }} </td>
                                         <td> {{ $con->title}} </td>
                                         <td> {{ $con->description }} </td>
 										<td> {{ $con->file }} </td>
 										<td> {{ $con->submitted_on }} </td>
+                                        <td> {{ $con->faculty->name ?? '' }} </td>
 										<td> {{ $con->event->title ?? '' }} </td>
                                         
                                         {{-- Function Delete --}}
@@ -88,7 +91,9 @@
                                         {{-- Update end --}}
 
                                         <td>
-                                            <a href="{{ route('contributions.download', [$con->id]) }}" class="btn btn-primary">Zip File Dowload</a>
+                                            <a href="{{ route('contributions.download', [$con->id]) }}">
+                                                <i class="fa-solid fa-download"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

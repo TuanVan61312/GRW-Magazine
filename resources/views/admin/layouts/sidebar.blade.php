@@ -29,7 +29,7 @@
 
                         {{-- class user navbar : role - user - permission --}}
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                             Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -56,14 +56,40 @@
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="{{ route('users.create') }}">Create User</a>
                                             <a class="nav-link" href="{{ route('users.index') }}">View User</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
                                         </nav>
                                     </div>
+                                
+                                    <a class="nav-link collapsed" href="{{ route('roles.index') }}" data-bs-toggle="collapse"
+                                    data-bs-target="#pagesCollapsePermission" aria-expanded="false"
+                                    aria-controls="pagesCollapsePermission">
+                                    Permission
+                                    <div class="sb-sidenav-collapse-arrow">
+                                        <i class="fas fa-angle-down"></i>
+                                    </div>
+                                </a>
+                                <div class="collapse" id="pagesCollapsePermission" aria-labelledby="headingOne"
+                                    data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        {{-- Create Permission --}}
+                                        {{-- @if (isset(auth()->user()->role->permission['name']['permission']['can-add'])) --}}
+                                            <a class="nav-link" href="{{ route('permissions.create') }}">Create
+                                                Permission</a>
+                                        {{-- @endif --}}
+                                        {{-- view Permission --}}
+                                        {{-- @if (isset(auth()->user()->role->permission['name']['permission']['can-view'])) --}}
+                                            <a class="nav-link" href="{{ route('permissions.index') }}">View Permission</a>
+                                        {{-- @endif --}}
+                                    </nav>
+                                </div>
                             </nav>
                         </div>
                         {{-- navbar Event --}}
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvent" aria-expanded="false" aria-controls="collapseEvent">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        <a class="nav-link" href="{{ route('events.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-meteor"></i></div>
+                            Event
+                        </a>
+                        {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvent" aria-expanded="false" aria-controls="collapseEvent">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-meteor"></i></i></div>
                             Event
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -72,19 +98,24 @@
                                 <a class="nav-link" href="{{ route('events.create') }}">Create Event</a>
                                 <a class="nav-link" href="{{ route('events.index') }}">View Event</a>
                             </nav>
-                        </div>
+                        </div> --}}
+
                         {{-- navbar Contribution --}}
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseContribution" aria-expanded="false" aria-controls="collapseContribution">
+                        <a class="nav-link" href="{{ route('contributions.index') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Contribution
+                        </a>
+                        {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseContribution" aria-expanded="false" aria-controls="collapseContribution">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Contribution
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseContribution" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        </a> --}}
+                        {{-- <div class="collapse" id="collapseContribution" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('contributions.create') }}">Add contribution</a>
                                 <a class="nav-link" href="{{ route('contributions.index') }}">View contribution</a>
                             </nav>
-                        </div>
+                        </div> --}}
 
                     <div class="sb-sidenav-menu-heading">Addons</div>
                     <a class="nav-link" href="charts.html">

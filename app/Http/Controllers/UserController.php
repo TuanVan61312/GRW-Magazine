@@ -109,7 +109,6 @@ class UserController extends Controller
             'address' => 'required',
             'faculty_id'=>'required',
             'role_id'=>'required',
-            'designation'=>'required',
             'start_from'=>'required',
             'image'=>'mimes:jpeg,jpg,png'
         ]);

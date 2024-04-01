@@ -17,7 +17,7 @@
             </div>
         @endif
         
-        <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">@csrf
+        <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>@csrf
 
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -26,7 +26,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>First name</label>
-                                <input type="text" name="firstname" class="form-control @error('firstname') is-invalid @enderror" required="">
+                                <input type="text" name="firstname" class="form-control @error('firstname') is-invalid @enderror" required>
 
                                 {{-- form validation First Name --}}
                                 @error('firstname')
@@ -51,7 +51,14 @@
 
                             <div class="form-group">
                                 <label>Address</label>
-                                <input type="text" name="address" class="form-control">
+                                <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" required>
+                                {{-- form validation Address --}}
+                                @error('address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                {{-- End Form Validate Address --}}
                             </div>
 
                             <div class="form-group">
@@ -98,7 +105,12 @@
 
                             <div class="form-group">
                                 <label>Image</label>
-                                <input type="file" name="image" class="form-control">
+                                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" required>
+                                @error('image')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
 
                         </div>

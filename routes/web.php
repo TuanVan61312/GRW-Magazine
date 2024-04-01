@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +20,12 @@ use App\Http\Controllers\RoleController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/home', function () {
+//     return view('home');
+// });
 
 
 
@@ -40,21 +41,51 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-//Route Faculty
-Route::resource('facultys', FacultyController::class);
+// //Route Faculty
+// Route::resource('facultys', FacultyController::class);
 
-//Route Role
-Route::resource('roles', RoleController::class);
+// //Route Role
+// Route::resource('roles', RoleController::class);
 
-//Route User
-Route::resource('users', UserController::class);
+// //Route User
+// Route::resource('users', UserController::class);
 
-//Route Event
-Route::resource('events', EventController::class);
+// //Route Event
+// Route::resource('events', EventController::class);
 
-//Route Contribution
-Route::resource('contributions', ContributionController::class);
-// get download contribution
-Route::get('contributions/download/{id}', [ContributionController::class, 'download'])->name('contributions.download');
+// //Route Contribution
+// Route::resource('contributions', ContributionController::class);
+// // get download contribution
+// Route::get('contributions/download/{id}', [ContributionController::class, 'download'])->name('contributions.download');
+
+//Route::group(['middleware'=>'auth'],function(){
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/home', function () {
+        return view('home');
+    });
+    //Route Faculty
+    Route::resource('facultys', FacultyController::class);
+
+    //Route Role
+    Route::resource('roles', RoleController::class);
+
+    //Route User
+    Route::resource('users', UserController::class);
+
+    //Route Event
+    Route::resource('events', EventController::class);
+
+    //Route Contribution
+    Route::resource('contributions', ContributionController::class);
+    // get download contribution
+    Route::get('contributions/download/{id}', [ContributionController::class, 'download'])->name('contributions.download');
+    //route permissions
+    Route::resource('permissions', PermissionController::class);
+    
+//});
+
 
 

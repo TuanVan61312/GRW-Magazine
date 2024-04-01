@@ -36,6 +36,18 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label>Faculty</label>
+        
+                                 <select class="form-control" name="faculty_id" required="">
+                                    @foreach(App\Models\Faculty::all() as $faculty)
+        
+                                        <option value="{{$faculty->id}}"@if($event->faculty_id==$faculty->id)selected @endif>{{$faculty->name}}</option>
+                                    @endforeach
+                                </select>
+        
+                            </div>
+
                             <div class="mt-4">
                                 <div class="form-group row">
                                     <label for="description" class="col-md-4 col-form-label text-md-right">{{ ('Description') }}</label>
