@@ -31,12 +31,10 @@
 */ -->
 
 
-@include('admin.layouts.navbar')
-
-@include('admin.layouts.sidebar')
+@include('admin.homepage.navbar')
 
 @include('admin.homepage.content')
 
-@include('admin.layouts.fotter')
+@include('admin.homepage.fotter')
 
 

@@ -58,7 +58,7 @@ require __DIR__.'/auth.php';
 // // get download contribution
 // Route::get('contributions/download/{id}', [ContributionController::class, 'download'])->name('contributions.download');
 
-//Route::group(['middleware'=>'auth'],function(){
+Route::group(['middleware'=>'auth'],function(){
 
     Route::get('/', function () {
         return view('welcome');
@@ -85,7 +85,7 @@ require __DIR__.'/auth.php';
     //route permissions
     Route::resource('permissions', PermissionController::class);
     
-//});
+});
 
 
 
