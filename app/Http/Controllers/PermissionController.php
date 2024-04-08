@@ -25,7 +25,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('admin.permission.create');
+        return view('admin.permission.createee');
     }
 
     /**
@@ -42,7 +42,8 @@ class PermissionController extends Controller
         
         $permission = Permission::create($request->all());
         
-        return redirect()->route('permissions.index')->with('success', 'Permission created successfully!!');
+        return redirect()->route('permissions.index')->with('message', 'Permission created successfully!!');
+        //return redirect()->back()->with('message', 'Permission created successfully!!');
         
     }
 

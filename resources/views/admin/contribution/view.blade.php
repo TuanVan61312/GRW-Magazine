@@ -49,9 +49,11 @@
                                         
                                         {{-- Function Delete --}}
                                         <td>
+                                            @if(isset(auth()->user()->role->permission['name']['contribution']['can-delete']))
                                                 <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $con->id }}">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </a>
+                                            @endif
                                         </td>
                                         {{-- Delete end --}}
 
@@ -84,16 +86,20 @@
 
                                         {{-- fuction update --}}
                                         <td>
+                                            @if(isset(auth()->user()->role->permission['name']['contribution']['can-edit']))
                                                 <a href="{{ route('contributions.edit', [$con->id]) }}">
                                                     <i class="fa-sharp fa-light fa-pen-to-square"></i>
                                                 </a>
+                                            @endif
                                         </td>
                                         {{-- Update end --}}
 
                                         <td>
-                                            <a href="{{ route('contributions.download', [$con->id]) }}">
-                                                <i class="fa-solid fa-download"></i>
-                                            </a>
+                                            @if(isset(auth()->user()->role->permission['name']['contribution']['can-download']))
+                                                <a href="{{ route('contributions.download', [$con->id]) }}">
+                                                    <i class="fa-solid fa-download"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

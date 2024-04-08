@@ -33,11 +33,11 @@
 
                                         {{-- Function Delete --}}
                                         <td>
-                                            {{-- @if(isset(auth()->user()->role->permission['name']['permission']['can-delete'])) --}}
+                                            @if(isset(auth()->user()->role->permission['name']['permission']['can-delete']))
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal{{$permission->id}}">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </a>
-                                            {{-- @endif --}}
+                                            @endif
                                         </td>
                                         {{-- Delete end --}}
 
@@ -65,11 +65,11 @@
                                         
                                         {{-- fuction update --}}
                                         <td>
-                                            {{-- @if(isset(auth()->user()->role->permission['name']['permission']['can-edit'])) --}}
+                                            @if(isset(auth()->user()->role->permission['name']['permission']['can-edit']))
                                                 <a href="{{ route('permissions.edit',[$permission->id]) }}"> 
                                                     <i class="fa-sharp fa-light fa-file-pen"></i> 
                                                 </a>
-                                            {{-- @endif --}}
+                                            @endif
                                         </td>
                                         {{-- Update end --}}
                                     </tr>

@@ -43,12 +43,12 @@
                                         <td> {{ $user->phone_number }} </td>
                                         {{-- Function Delete --}}
                                         <td>
-                                            {{-- @if(isset(auth()->user()->role->permission['name']['user']['can-delete'])) --}}
+                                            @if(isset(auth()->user()->role->permission['name']['user']['can-delete']))
                                                 <a href="#" data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $user->id }}">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </a>
-                                            {{-- @endif --}}
+                                            @endif
                                         </td>
                                         {{-- Delete end --}}
 
@@ -81,11 +81,11 @@
 
                                         {{-- fuction update --}}
                                         <td>
-                                            {{-- @if(isset(auth()->user()->role->permission['name']['user']['can-edit'])) --}}
+                                            @if(isset(auth()->user()->role->permission['name']['user']['can-edit']))
                                                 <a href="{{ route('users.edit', [$user->id]) }}">
                                                     <i class="fa-sharp fa-light fa-user-pen"></i>
                                                 </a>
-                                            {{-- @endif --}}
+                                            @endif
                                         </td>
                                         {{-- Update end --}}
                                     </tr>

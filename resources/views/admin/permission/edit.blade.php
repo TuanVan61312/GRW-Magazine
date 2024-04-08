@@ -27,7 +27,7 @@
                                         <th scope="col">Can-Edit</th>
                                         <th scope="col">Can-View</th>
                                         <th scope="col">Can-Delete</th>
-                                        <th scope="col">Can-List</th>
+                                        <th scope="col">Can-Download</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
@@ -37,7 +37,7 @@
                                         <td><input type="checkbox" name="name[faculty][can-edit]" @if($permission['name']['faculty']['can-edit'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[faculty][can-view]" @if($permission['name']['faculty']['can-view'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[faculty][can-delete]" @if($permission['name']['faculty']['can-delete'] ?? null) checked @endif value="1"></td>
-                                        <td><input type="checkbox" name="name[faculty][can-list]" @if($permission['name']['faculty']['can-list'] ?? null) checked @endif value="1"></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Role</td>
@@ -45,7 +45,7 @@
                                         <td><input type="checkbox" name="name[role][can-edit]" @if($permission['name']['role']['can-edit'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[role][can-view]" @if($permission['name']['role']['can-view'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[role][can-delete]" @if($permission['name']['role']['can-delete'] ?? null) checked @endif value="1"></td>
-                                        <td><input type="checkbox" name="name[role][can-list]" @if($permission['name']['role']['can-list'] ?? null) checked @endif value="1"></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>User</td>
@@ -53,7 +53,7 @@
                                         <td><input type="checkbox" name="name[user][can-edit]" @if($permission['name']['user']['can-edit'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[user][can-view]" @if($permission['name']['user']['can-view'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[user][can-delete]" @if($permission['name']['user']['can-delete'] ?? null) checked @endif value="1"></td>
-                                        <td><input type="checkbox" name="name[user][can-list]" @if($permission['name']['user']['can-list'] ?? null) checked @endif value="1"></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td>Permisstion</td>
@@ -61,23 +61,25 @@
                                         <td><input type="checkbox" name="name[permission][can-edit]" @if($permission['name']['permission']['can-edit'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[permission][can-view]" @if($permission['name']['permission']['can-view'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[permission][can-delete]" @if($permission['name']['permission']['can-delete'] ?? null) checked @endif value="1"></td>
-                                        <td><input type="checkbox" name="name[permission][can-list]" @if($permission['name']['permission']['can-list'] ?? null) checked @endif value="1"></td>
+                                        <td></td>
                                     </tr>
+
                                     <tr>
                                         <td>Event</td>
                                         <td><input type="checkbox" name="name[event][can-add]" @if($permission['name']['event']['can-add'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[event][can-edit]" @if($permission['name']['event']['can-edit'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[event][can-view]" @if($permission['name']['event']['can-view'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[event][can-delete]" @if($permission['name']['event']['can-delete'] ?? null) checked @endif value="1"></td>
-                                        <td><input type="checkbox" name="name[event][can-list]" @if($permission['name']['event']['can-list'] ?? null) checked @endif value="1"></td>
+                                        <td></td>
                                     </tr>
+
                                     <tr>
                                         <td>Contribution</td>
                                         <td><input type="checkbox" name="name[contribution][can-add]" @if($permission['name']['contribution']['can-add'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[contribution][can-edit]" @if($permission['name']['contribution']['can-edit'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[contribution][can-view]" @if($permission['name']['contribution']['can-view'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[contribution][can-delete]" @if($permission['name']['contribution']['can-delete'] ?? null) checked @endif value="1"></td>
-                                        <td><input type="checkbox" name="name[contribution][can-list]" @if($permission['name']['contribution']['can-list'] ?? null) checked @endif value="1"></td>
+                                        <td><input type="checkbox" name="name[contribution][can-download]" @if($permission['name']['contribution']['can-download'] ?? null) checked @endif value="1"></td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -35,9 +35,11 @@
                                         <td> {{ $role->description }} </td>
                                         {{-- Function Delete --}}
                                         <td>
+                                            @if(isset(auth()->user()->role->permission['name']['role']['can-delete']))
                                                 <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $role->id }}">
                                                     <i class="fa-solid fa-trash-can"></i>
                                                 </a>
+                                            @endif
                                         </td>
                                         {{-- Delete end --}}
 
@@ -70,9 +72,11 @@
 
                                         {{-- fuction update --}}
                                         <td>
+                                            @if(isset(auth()->user()->role->permission['name']['role']['can-edit']))
                                                 <a href="{{ route('roles.edit', [$role->id]) }}">
                                                     <i class="fa-sharp fa-light fa-pen-to-square"></i>
                                                 </a>
+                                            @endif
                                         </td>
                                         {{-- Update end --}}
                                     </tr>
