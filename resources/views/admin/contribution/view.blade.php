@@ -31,6 +31,7 @@
                                 <th>Delete</th>
                                 <th>Edit</th>
                                 <th>Dowload</th>
+                                <th>Comment</th>
                             </tr>
                         </thead>
 
@@ -40,7 +41,9 @@
                                     <tr>
                                         <td> {{ $key + 1 }} </td>
                                         <td> {{ $con->user->name ?? '' }} </td>
-                                        <td> {{ $con->title}} </td>
+                                        <td>
+                                            <a href="{{ route('contributions.viewComments', [$con->id]) }}">{{ $con->title}} </a> 
+                                        </td>
                                         <td> {{ $con->description }} </td>
 										<td> {{ $con->file }} </td>
 										<td> {{ $con->submitted_on }} </td>
@@ -94,6 +97,7 @@
                                         </td>
                                         {{-- Update end --}}
 
+                                        {{-- Function Download --}}
                                         <td>
                                             @if(isset(auth()->user()->role->permission['name']['contribution']['can-download']))
                                                 <a href="{{ route('contributions.download', [$con->id]) }}">
@@ -101,6 +105,18 @@
                                                 </a>
                                             @endif
                                         </td>
+                                        {{-- end download --}}
+
+                                        {{-- Comment Function --}}
+                                        <td>
+                                            @if ($con->submitted_on->addDays(14) >= now())
+                                                <a href="{{ route('contributions.comment', $con) }}" class="btn btn-primary">Comment</a>
+                                            @else
+                                                <p>Comments have expired</p>
+                                            @endif
+                                        </td>
+                                        {{-- End Comment --}}
+
                                     </tr>
                                 @endforeach
                             @else

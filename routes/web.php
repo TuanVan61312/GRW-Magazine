@@ -80,10 +80,18 @@ Route::group(['middleware' => ['auth', 'permission']],function(){
 
     //Route Contribution
     Route::resource('contributions', ContributionController::class);
+
     // get download contribution
     Route::get('contributions/download/{id}', [ContributionController::class, 'download'])->name('contributions.download');
     //route permissions
     Route::resource('permissions', PermissionController::class);
+    //route comment of contribution
+    Route::get('contributions/{contribution}/comment', [ContributionController::class, 'comment'])->name('contributions.comment');
+    Route::post('contributions/{contribution}/submit-comment', [ContributionController::class, 'submitComment'])->name('contributions.submitComment');
+    Route::get('contributions/view_comment/{id}', [ContributionController::class, 'viewComment'])->name('contributions.viewComments');
+
+    //test mail
+    Route::get('/contact',[ContributionController::class, 'contact'])->name('contribitions.contact');
     
 });
 

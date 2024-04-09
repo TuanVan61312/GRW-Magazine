@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Contribution;
 use App\Models\Event;
+use App\Models\Comment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use ZipArchive;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 class ContributionController extends Controller
 {
@@ -20,6 +23,9 @@ class ContributionController extends Controller
     public function index()
     {
         $contributions = Contribution::all();
+        foreach ($contributions as $contribution) {
+            $contribution->submitted_on = Carbon::parse($contribution->submitted_on);
+        }
         return view('admin.contribution.view', compact('contributions'));
     }
 
@@ -40,43 +46,6 @@ class ContributionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function store(Request $request)
-    // {
-    //     // Validate other fields
-    //     $validatedData = $request->validate([
-    //         'user_id' => 'required',
-    //         'faculty_id' => 'required',
-    //         'title' => 'required|string|max:50',
-    //         'description' => 'required|string',
-    //         'file' => 'required|mimes:doc,docx,pdf,jpg,jpeg,png',
-    //         'event_id' => 'required|integer',
-    //     ]);
-
-    //     // if ($request->hasFile('file')) {
-    //     //     $file = $request->file('file')->getClientOriginalName();
-    //     //     $request->file('file')->move(public_path('uploads'), $file);
-    //     // }
-
-    //     if ($request->hasFile('file')) {
-    //         $file = $request->file('file');
-    
-    //         // Tạo tên file mới với timestamp và đuôi mở rộng
-    //         $fileName = time() . '.' . $file->getClientOriginalExtension();
-    
-    //         // Lưu trữ file trong thư mục uploads
-    //         $file->move(public_path('storage'), $fileName);
-    
-    //         // Cập nhật mảng validatedData với đường dẫn file
-    //         $validatedData['file'] = $fileName;
-    //         // $validatedData['file'] = 'app/public/uploads/' . $fileName;
-    //     }
-
-    //     // Set submitted_on field to current time
-    //     $validatedData['submitted_on'] = Carbon::now();
-
-    //     Contribution::create($validatedData);
-    //     return redirect()->route('contributions.create')->with('success', 'Contribution created successfully');
-    // }
 
     //có thể upload nhiều file ở đây
     public function store(Request $request)
@@ -117,10 +86,75 @@ class ContributionController extends Controller
 
         // Tạo một Contribution mới và truyền dữ liệu vào
         Contribution::create($validatedData);
+        // email
+        $email = auth()->user()->email;
+        $name = auth()->user()->name;
+        // $title = require('title');
+        // $faculty = $faculty->name;
+        // $event = require('event->title');
+        // $email = 'hoangcvgch190446@fpt.edu.vn';
+        Mail::to('hoangcvgch190446@fpt.edu.vn')->send(new SendMail($email,$name));
+        return redirect()->route('contributions.index')->with('success', 'Contribution created successfully');
 
         // Redirect đến trang tạo mới với thông báo thành công
         return redirect()->route('contributions.create')->with('success', 'Contribution created successfully');
+
     }
+
+    //update store new khong su dung đuọc
+    // public function store(Request $request)
+    // {
+    //     // Validate other fields
+    //     $validatedData = $request->validate([
+    //         'user_id' => 'required',
+    //         'faculty_id' => 'required',
+    //         'title' => 'required|string|max:50',
+    //         'description' => 'required|string',
+    //         'file.*' => 'required|mimes:doc,docx,pdf,jpg,jpeg,png', // Chú ý vào 'file.*' để kiểm tra từng file trong mảng
+    //         'event_id' => 'required|integer',
+    //     ]);
+
+    //     // Kiểm tra xem event có quá hạn không
+    //     $event = Event::findOrFail($request->event_id);
+    //     if ($event->final_date < now()) {
+    //         // Nếu đã quá hạn, không cho phép nộp contribution và chuyển hướng về trang trước với thông báo
+    //         return redirect()->back()->with('error', 'The event is overdue. Cannot submit contribution.');
+    //     }
+
+    //     // Tiếp tục xử lý nếu event chưa quá hạn
+
+    //     $fileNames = []; // Khởi tạo một mảng để lưu trữ các tên tệp tin
+        
+    //     // Kiểm tra xem có tệp nào được tải lên không
+    //     if ($request->hasFile('file')) {
+    //         $files = $request->file('file');
+            
+    //         foreach ($files as $file) {
+    //             // Tạo tên file mới với timestamp và đuôi mở rộng
+    //             $fileName = time() . '_' . $file->getClientOriginalName();
+
+    //             // Lưu trữ file trong thư mục storage/app/public/uploads
+    //             $file->move(public_path('storage/uploads'), $fileName);
+
+    //             // Thêm tên file vào mảng fileNames
+    //             $fileNames[] = $fileName;
+    //         }
+    //     }
+        
+    //     // Gán một chuỗi của các tên tệp tin cho trường file trong $validatedData
+    //     $validatedData['file'] = implode(',', $fileNames);
+
+    //     // Set submitted_on field to current time
+    //     $validatedData['submitted_on'] = now();
+
+    //     // Tạo một Contribution mới và truyền dữ liệu vào
+    //     Contribution::create($validatedData);
+
+    //     // Redirect đến trang tạo mới với thông báo thành công
+    //     return redirect()->route('contributions.create')->with('success', 'Contribution created successfully');
+    
+    // }
+
 
     /**
      * Display the specified resource.
@@ -293,4 +327,55 @@ class ContributionController extends Controller
         }
         
     }
+
+    //comment
+    public function comment(Contribution $contribution){
+        return view('admin.contribution.comment', compact('contribution'));
+    }
+    
+    //comment store
+    public function submitComment(Request $request, Contribution $contribution){
+        // Kiểm tra xem người dùng hiện tại có phải là Marketing Coordinator không
+        // if (!$request->user()->isMarketingCoordinator()) {
+        //     return back()->with('error', 'Bạn không có quyền thực hiện hành động này');
+        // }
+
+        // Kiểm tra xem nội dung comment có được cung cấp không
+        $request->validate([
+            'content' => 'required|string'
+        ]);
+        
+        // Tạo comment mới
+        $comment = new Comment();
+        $comment->contribution_id = $contribution->id;
+        $comment->user_id = $request->user()->id;
+        
+        $comment->content = $request->input('content');
+        $comment->commented_at = now();
+        $comment->save();
+        
+        return back()->with('success', 'Comment Succesfully');
+    }
+
+    //comment view
+    public function viewComment($id){
+        // $comments = Comment::find($id);
+
+        $comments = Comment::where('contribution_id', $id)->get();
+
+        return view('admin.contribution.cmview', compact('comments'));
+    }
+
+    public function contact(){
+        // $email = 'hoangcvgch190446@fpt.edu.vn';
+        // Mail::to($email)->send(new SendMail());
+
+        return view('admin.email.contact');
+    }
+
+    // public function senMail(){
+    //     $email = 'hoangcvgch190446@fpt.edu.vn';
+    //     Mail::to($email)->send(new SendMail());
+    //     return redirect()->route('contributions.index')->with('success', 'Contribution created successfully');
+    // }
 }

@@ -36,7 +36,7 @@ class FacultyController extends Controller
     public function store(Request $request)
     {     
         $this->validate($request, [
-            'name' => 'required', // Sử dụng dấu => để chỉ định quy tắc cho trường 'name'
+            'name' => 'required', 
         ]);
         
         $data = $request->all();

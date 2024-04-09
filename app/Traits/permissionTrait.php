@@ -46,7 +46,7 @@ trait permissionTrait{
             return abort(401);
         }
 
-        if(!isset(auth()->user()->role->permission['name']['event']['can-add']) && \Route::is('events.index')){
+        if(!isset(auth()->user()->role->permission['name']['event']['can-view']) && \Route::is('events.index')){
             return abort(401);
         }
 
