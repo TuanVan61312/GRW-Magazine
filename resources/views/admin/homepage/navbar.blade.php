@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="favicon.png">
 
     <meta name="description" content="" />
-    <meta name="keywords" content="bootstrap, bootstrap5" />
+    <meta name="keywords" content="bootstrap , bootstrap5" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
