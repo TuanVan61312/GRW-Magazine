@@ -89,9 +89,6 @@ class ContributionController extends Controller
         // email
         $email = auth()->user()->email;
         $name = auth()->user()->name;
-        // $title = require('title');
-        // $faculty = $faculty->name;
-        // $event = require('event->title');
         // $email = 'hoangcvgch190446@fpt.edu.vn';
         Mail::to('hoangcvgch190446@fpt.edu.vn')->send(new SendMail($email,$name));
         return redirect()->route('contributions.index')->with('success', 'Contribution created successfully');

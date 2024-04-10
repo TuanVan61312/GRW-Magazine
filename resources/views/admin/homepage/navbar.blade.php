@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="homepage/css/flatpickr.min.css">
 
 
-    <title>Greenwich blog student</title>
+    <title>GRW Magazine blog student</title>
 </head>
 
 <body>
@@ -49,9 +49,7 @@
                 <div class="site-navigation">
                     <div class="row g-0 align-items-center">
                         <div class="col-2">
-                            {{-- <a href="{{ url('/') }}" class="logo m-0 float-start">CMS GREENWICH<span
-                                    class="text-primary"></span></a> --}}
-                                    <a class="logo m-0 float-start" href="{{ url('/') }}">Greenwich<sup>cms</sup></a>
+                                    <a class="logo m-0 float-start" href="{{ url('/') }}">GRW<sup>Magazine</sup></a>
                         </div>
                         <div class="col-8 text-center">
                             <form action="#" class="search-form d-inline-block d-lg-none">
@@ -64,8 +62,16 @@
                                 <li>
                                     <a href="{{ route('contributions.store') }}">Contribution</a>
                                 </li>
-                                <li><a href="category.html">About</a></li>
+                                {{-- <li><a href="category.html">About</a></li> --}}
                             </ul>
+
+                            <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu mx-auto">
+                                {{-- <li class="active"><a href="index.html">Home</a></li> --}}
+                                <li>
+                                    <a href="{{ route('events.index') }}">Event</a>
+                                </li>
+                            </ul>
+
                         </div>
 
                         <div class="col-2 text-end d-flex align-items-center">
@@ -81,17 +87,26 @@
                                     <i class="fas fa-user fa-fw" style="color:aliceblue"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="#!">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                                    <a class="dropdown-item" href="#"><i class="fas fa-user fa-fw"></i> {{ Auth()->user()->name }} </a>
+                                    <li><a class="dropdown-item" href="#!"><i class="fa fa-cog" aria-hidden="true"> </i> Settings </a></li>
+                                    {{-- <li><a class="dropdown-item" href="#!">Activity Log</a></li> --}}
                                     <li>
                                         <hr class="dropdown-divider" />
                                     </li>
-                                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                                    {{-- <li><a class="dropdown-item" href="#!">Logout</a></li> --}}
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                    <li>
+                                        <x-dropdown-link :href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </li>
+                                    </form>
                                 </ul>
                             </div>
                         </div>
-
-
 
                     </div>
                 </div>
