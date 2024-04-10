@@ -82,7 +82,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>File</label>
                                 <input type="file" name="file[]" class="form-control @error('file.*') is-invalid @enderror" id="validationCustom02" required multiple>
                                 @error('file.*')
@@ -90,7 +90,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             
 
