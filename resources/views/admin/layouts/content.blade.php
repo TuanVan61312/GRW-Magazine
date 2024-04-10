@@ -71,7 +71,7 @@
                         <div class="card-header">Your Details</div>
                          <div class="card-header" style="background-color: orange">Email:{{Auth::user()->email}}</div>
                          <div class="card-header" style="background-color: orange">Address:{{Auth::user()->address}}</div>
-                         <div class="card-header" style="background-color: orange">Mobile number:{{Auth::user()->mobile_number}}</div>
+                         <div class="card-header" style="background-color: orange">Mobile Phone number:{{Auth::user()->phone_number}}</div>
                          <div class="card-header" style="background-color: orange">Designation:{{Auth::user()->designation}}</div>
                          <div class="card-header" style="background-color: orange">Start date:{{Auth::user()->start_from}}</div>
                          <div class="card-header" style="background-color: orange">Faculty:{{Auth::user()->faculty->name}}</div>
