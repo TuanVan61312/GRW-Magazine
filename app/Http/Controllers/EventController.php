@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -14,7 +16,18 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
+        // Lấy user hiện tại
+        $user = Auth::user();
+
+        // Kiểm tra vai trò của user
+        if ($user->isAdmin() || $user->isMarketingManager()) {
+            $events = Event::all();
+        } else {
+            $userFaculty = $user->faculty;
+            $events = Event::where('faculty_id', $userFaculty->id)->get();
+        }
+
+        // $events = Event::all();
         return view('admin.event.view', compact('events'));
     }
 

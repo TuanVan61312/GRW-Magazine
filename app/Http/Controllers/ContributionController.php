@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use ZipArchive;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ContributionController extends Controller
 {
@@ -22,7 +24,17 @@ class ContributionController extends Controller
      */
     public function index()
     {
-        $contributions = Contribution::all();
+        // Lấy user hiện tại
+        $user = Auth::user();
+
+        // Kiểm tra vai trò của user
+        if ($user->isAdmin() || $user->isMarketingManager()) {
+            $contributions = Contribution::all();;
+        } else {
+            $userFaculty = $user->faculty;
+            $contributions = Contribution::where('faculty_id', $userFaculty->id)->get();
+        }
+        
         foreach ($contributions as $contribution) {
             $contribution->submitted_on = Carbon::parse($contribution->submitted_on);
         }
@@ -90,7 +102,7 @@ class ContributionController extends Controller
         $email = auth()->user()->email;
         $name = auth()->user()->name;
         // $email = 'hoangcvgch190446@fpt.edu.vn';
-        Mail::to('tuananh17042001aa@gmail.com')->send(new SendMail($email,$name));
+        Mail::to('hoangcvgch190446@fpt.edu.vn')->send(new SendMail($email,$name));
         return redirect()->route('contributions.index')->with('success', 'Contribution created successfully');
 
         // Redirect đến trang tạo mới với thông báo thành công

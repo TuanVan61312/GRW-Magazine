@@ -101,7 +101,7 @@
                                         <td><input type="checkbox" name="name[contribution][can-view]" @if($permission['name']['contribution']['can-view'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[contribution][can-delete]" @if($permission['name']['contribution']['can-delete'] ?? null) checked @endif value="1"></td>
                                         <td><input type="checkbox" name="name[contribution][can-download]" @if($permission['name']['contribution']['can-download'] ?? null) checked @endif value="1"></td>
-                                        <td><input type="checkbox" name="name[contribution][can-download]" @if($permission['name']['contribution']['can-comment'] ?? null) checked @endif value="1"></td>
+                                        <td><input type="checkbox" name="name[contribution][can-comment]" @if($permission['name']['contribution']['can-comment'] ?? null) checked @endif value="1"></td>
                                     </tr>
                                 </tbody>
                             </table>
