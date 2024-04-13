@@ -90,7 +90,7 @@ class ContributionController extends Controller
         $email = auth()->user()->email;
         $name = auth()->user()->name;
         // $email = 'hoangcvgch190446@fpt.edu.vn';
-        Mail::to('hoangcvgch190446@fpt.edu.vn')->send(new SendMail($email,$name));
+        Mail::to('tuananh17042001aa@gmail.com')->send(new SendMail($email,$name));
         return redirect()->route('contributions.index')->with('success', 'Contribution created successfully');
 
         // Redirect đến trang tạo mới với thông báo thành công
