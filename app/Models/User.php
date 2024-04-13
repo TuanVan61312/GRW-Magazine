@@ -66,13 +66,13 @@ class User extends Authenticatable
 
     public function isMarketingManager()
     {
-        $marketingManagerRole = Role::where('name', 'marketing manager')->first(); // Tìm role có tên là 'marketing manager'
+        $marketingManagerRole = Role::where('name', 'Marketing Manager')->first(); // Tìm role có tên là 'marketing manager'
         return $this->role_id === $marketingManagerRole->id; // So sánh role_id của user với id của vai trò marketing manager
     }
 
     public function isMarketingCoordination()
     {
-        $marketingCoordinatorRole = Role::where('name', 'marketing coordinator')->first(); // Tìm role có tên là 'marketing coordinator'
+        $marketingCoordinatorRole = Role::where('name', 'Marketing Coordinator')->first(); // Tìm role có tên là 'marketing coordinator'
         return $this->role_id === $marketingCoordinatorRole->id; // So sánh role_id của user với id của vai trò marketing coordinator
     }
     
