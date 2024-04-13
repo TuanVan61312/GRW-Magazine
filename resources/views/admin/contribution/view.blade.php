@@ -109,10 +109,12 @@
 
                                         {{-- Comment Function --}}
                                         <td>
-                                            @if ($con->submitted_on->addDays(14) >= now())
-                                                <a href="{{ route('contributions.comment', $con) }}" class="btn btn-primary">Comment</a>
-                                            @else
-                                                <p>Comments have expired</p>
+                                            @if(isset(auth()->user()->role->permission['name']['contribution']['can-comment']))
+                                                @if ($con->submitted_on->addDays(14) >= now())
+                                                    <a href="{{ route('contributions.comment', $con) }}" class="btn btn-primary">Comment</a>
+                                                @else
+                                                    <p>Comments have expired</p>
+                                                @endif
                                             @endif
                                         </td>
                                         {{-- End Comment --}}

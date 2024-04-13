@@ -45,10 +45,20 @@
                                         <th scope="col">Can-view</th>
                                         <th scope="col">Can-delete</th>
                                         <th scope="col">Can-download</th>
+                                        <th scope="col">Can-Comment</th>
                                     </tr>
                                 </thead>
                                 
                                 <tbody>
+                                    <tr>
+                                        <td>Blog</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><input type="checkbox" name="name[home][can-view]" value="1"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
 
                                     <tr>
                                         <td>Faculty</td>
@@ -56,6 +66,7 @@
                                         <td><input type="checkbox" name="name[faculty][can-edit]" value="1"></td>
                                         <td><input type="checkbox" name="name[faculty][can-view]" value="1"></td>
                                         <td><input type="checkbox" name="name[faculty][can-delete]" value="1"></td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
 
@@ -66,6 +77,7 @@
                                         <td><input type="checkbox" name="name[role][can-view]" value="1"></td>
                                         <td><input type="checkbox" name="name[role][can-delete]" value="1"></td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
 
                                     <tr>
@@ -74,6 +86,7 @@
                                         <td><input type="checkbox" name="name[permission][can-edit]" value="1"></td>
                                         <td><input type="checkbox" name="name[permission][can-view]" value="1"></td>
                                         <td><input type="checkbox" name="name[permission][can-delete]" value="1"></td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
 
@@ -84,6 +97,7 @@
                                         <td><input type="checkbox" name="name[user][can-view]" value="1"></td>
                                         <td><input type="checkbox" name="name[user][can-delete]" value="1"></td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
 
                                     <tr>
@@ -92,6 +106,7 @@
                                         <td><input type="checkbox" name="name[event][can-edit]" value="1"></td>
                                         <td><input type="checkbox" name="name[event][can-view]" value="1"></td>
                                         <td><input type="checkbox" name="name[event][can-delete]" value="1"></td>
+                                        <td></td>
                                         <td></td>
                                     </tr>
 
@@ -102,6 +117,7 @@
                                         <td><input type="checkbox" name="name[contribution][can-view]" value="1"></td>
                                         <td><input type="checkbox" name="name[contribution][can-delete]" value="1"></td>
                                         <td><input type="checkbox" name="name[contribution][can-download]" value="1"></td>
+                                        <td><input type="checkbox" name="name[contribution][can-comment]" value="1"></td>
                                     </tr>
 
                                 </tbody>
