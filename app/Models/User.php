@@ -75,6 +75,18 @@ class User extends Authenticatable
         $marketingCoordinatorRole = Role::where('name', 'Marketing Coordinator')->first(); // Tìm role có tên là 'marketing coordinator'
         return $this->role_id === $marketingCoordinatorRole->id; // So sánh role_id của user với id của vai trò marketing coordinator
     }
+
+    public function isStudent()
+    {
+        $studentRole = Role::where('name', 'Student')->first(); // Tìm role có tên là 'marketing coordinator'
+        return $this->role_id === $studentRole->id; // So sánh role_id của user với id của vai trò marketing coordinator
+    }
+
+    public function isGuest()
+    {
+        $guestRole = Role::where('name', 'Guest')->first(); // Tìm role có tên là 'marketing coordinator'
+        return $this->role_id === $guestRole->id; // So sánh role_id của user với id của vai trò marketing coordinator
+    }
     
 
 }
