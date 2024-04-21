@@ -127,7 +127,7 @@ class UserController extends Controller
             $password = $user->password;
         }
 
-        $data['iamge'] = $image;
+        $data['image'] = $image;
         $data['password'] = bcrypt($password);
         $user->update($data);
         return redirect()->back()->with('message', 'User updated successfully');
