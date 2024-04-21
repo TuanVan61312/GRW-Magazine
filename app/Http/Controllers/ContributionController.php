@@ -32,7 +32,8 @@ class ContributionController extends Controller
             $contributions = Contribution::all();;
         } else {
             $userFaculty = $user->faculty;
-            $contributions = Contribution::where('faculty_id', $userFaculty->id)->get();
+            // $contributions = Contribution::where('faculty_id', $userFaculty->id)->get();
+            $contributions = Contribution::where('user_id', $user->id)->get();
         }
         
         foreach ($contributions as $contribution) {
