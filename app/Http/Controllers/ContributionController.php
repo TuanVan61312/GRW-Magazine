@@ -179,14 +179,14 @@ class ContributionController extends Controller
     public function destroy($id)
     {
         try {
-            // Tìm đối tượng Contribution cần xóa
+            // Find the Contribution object to delete
             $contribution = Contribution::findOrFail($id);
 
-            // Xóa đối tượng Contribution
+            // delete contribution
             $contribution->delete();
 
-            // Sau khi xóa đối tượng Contribution, cũng xóa tập tin tương ứng từ thư mục storage
-            $filePath = public_path('storage/' . $contribution->file);
+            // After deleting the Contribution object, also delete the corresponding file from the storage folder
+            $filePath = public_path('storage/uploads/' . $contribution->file);
             if (File::exists($filePath)) {
                 File::delete($filePath);
             }
@@ -204,85 +204,22 @@ class ContributionController extends Controller
         }
     }
 
-    // public function download(Contribution $contribution){
-    //     try {
-    //         $filePath = $contribution->file;
-    //         $fullFilePath = public_path('storage' . $filePath);
-    
-    //         if (!file_exists($fullFilePath)) {
-    //             return response()->json(['error' => 'File không tồn tại'], 404);
-    //         }
-    
-    //         $zip = new ZipArchive();
-    //         $fileName = "my-zip-file.zip";
-
-    //         // $files = File::files($fullFilePath);
-    //         //     $filteredFiles = array_filter($files, function($file) use ($contribution) {
-    //         //         return basename($file) === $contribution->file;
-    //         //     });
-
-    //         if($zip->open($fileName, ZipArchive::CREATE)){
-    //             $files = File::files($fullFilePath);
-    //             // $filteredFiles = array_filter($files, function($file) use ($contribution) {
-    //             //     return basename($file) === $contribution->file;
-    //             // });
-    //             foreach($files as $file){
-    //                 $nameInZipFile = basename($file);
-    //                 $zip->addFile($file, $nameInZipFile);
-    //             }
-    //             $zip->close();
-    //         }
-
-    //         return response()->download($fileName);
-    //     } catch (\Exception $e){
-    //         return response()->json(['error' => $e->getMessage()], 500);
-    //     }
-    // }
-
-
-    // public function download($id) {
-    //     try {
-    //         // Tìm đối tượng Contribution
-    //         $contributions = Contribution::findOrFail($id);
-            
-    //         // Tạo tên tập tin ZIP
-    //         $zipFileName = 'contributions_' . $contributions->user->name . '_' . now()->format('YmdHis') . '.zip';
-    //         $zipFilePath = public_path($zipFileName);
-            
-    //         // Khởi tạo đối tượng ZipArchive
-    //         $zip = new ZipArchive();
-    //         if ($zip->open($zipFilePath, ZipArchive::CREATE) === true) {
-    //             // Thêm tệp đã tải lên vào tập tin ZIP
-    //             $filePath = public_path('storage/' . $contributions->file);
-    //             if (File::exists($filePath)) {
-    //                 $zip->addFile($filePath, $contributions->file);
-    //             }
-    //             $zip->close();
-    //         }
-    
-    //         // Trả về tệp ZIP cho người dùng
-    //         return response()->download($zipFilePath, $zipFileName)->deleteFileAfterSend(true);
-    //     } catch (\Exception $e) {
-    //         return response()->json(['error' => $e->getMessage()], 500);
-    //     }
-    // }
-
-    //DOWLOAN MOI UPDATE
+    //DOWLOAN new UPDATE
 
     public function download($id)
     {
         try {
-            // Tìm đối tượng Contribution
+            // Find the Contribution object
             $contribution = Contribution::findOrFail($id);
             
-            // Tạo tên tập tin ZIP
+            // Create a ZIP file name
             $zipFileName = 'contributions_' . $contribution->user->name . '_' . now()->format('YmdHis') . '.zip';
             $zipFilePath = public_path($zipFileName);
             
-            // Khởi tạo đối tượng ZipArchive
+            // Initialize the ZipArchive object
             $zip = new ZipArchive();
             if ($zip->open($zipFilePath, ZipArchive::CREATE) === true) {
-                // Thêm các tệp đã tải lên vào tập tin ZIP
+                // Add uploaded files to ZIP file
                 $fileNames = explode(',', $contribution->file);
                 foreach ($fileNames as $fileName) {
                     $filePath = public_path('storage/uploads/' . $fileName);
@@ -293,7 +230,7 @@ class ContributionController extends Controller
                 $zip->close();
             }
 
-            // Trả về tệp ZIP cho người dùng
+            // Returns the ZIP file to the user
             return response()->download($zipFilePath, $zipFileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
