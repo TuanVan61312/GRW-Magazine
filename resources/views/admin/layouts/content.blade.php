@@ -139,7 +139,7 @@
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
                             <a class="small text-white stretched-link" href="{{ route('contributions.index') }}" style="font-size:18px;">
-                                {{ App\Models\Contribution::where('faculty_id', $user->faculty->id)->count() }} {{-- Đếm số lượng contribution của faculty của người dùng --}}
+                                {{ App\Models\Contribution::where('faculty_id', $user->faculty->id)->count() }} 
                             </a>
                             <div class="small text-white"></div>
                         </div>
