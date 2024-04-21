@@ -6,8 +6,11 @@
         <div class="container-fluid px-4">
             <h1 class="mt-4">Dashboard</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
+                <li class="breadcrumb-item active">
+                    <i class="far fa-smile me-1"></i> 
+                    <span class="text-primary blink">Welcome {{ Auth::user()->role->name }} to the application</span>
+                </li>
+            </ol>                     
             <div class="row">
                 @if($user->isAdmin() || $user->isMarketingManager())
                 {{-- folder user --}}
@@ -163,22 +166,39 @@
                 @endif
 
             </div>
-
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card mb-4">
-                        <div class="card-header">Your Details</div>
-                         <div class="card-header" style="background-color: orange">Email:{{Auth::user()->email}}</div>
-                         <div class="card-header" style="background-color: orange">Address:{{Auth::user()->address}}</div>
-                         <div class="card-header" style="background-color: orange">Mobile Phone number:{{Auth::user()->phone_number}}</div>
-                         <div class="card-header" style="background-color: orange">Designation:{{Auth::user()->designation}}</div>
-                         <div class="card-header" style="background-color: orange">Start date:{{Auth::user()->start_from}}</div>
-                         <div class="card-header" style="background-color: orange">Faculty:{{Auth::user()->faculty->name}}</div>
-                         <div class="card-header " style="background-color: orange"><p class="badge rounded-pill bg-success">Role:{{Auth::user()->role->name}}</p></div>
+                        <div class="card-header bg-gradient-primary">Your Details</div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item" style="background-color: #FFA500;">
+                                    <strong>Email:</strong> {{ Auth::user()->email }}
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFA500;">
+                                    <strong>Address:</strong> {{ Auth::user()->address }}
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFA500;">
+                                    <strong>Mobile Phone number:</strong> {{ Auth::user()->phone_number }}
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFA500;">
+                                    <strong>Designation:</strong> {{ Auth::user()->designation }}
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFA500;">
+                                    <strong>Start date:</strong> {{ Auth::user()->start_from }}
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFA500;">
+                                    <strong>Faculty:</strong> {{ Auth::user()->faculty->name }}
+                                </li>
+                                <li class="list-group-item" style="background-color: #FFA500;">
+                                    <strong>Role:</strong> <span class="badge rounded-pill bg-success">{{ Auth::user()->role->name }}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-
+            
             <div class="row">
                 <div class="col-xl-6">
                     <div class="card mb-4">

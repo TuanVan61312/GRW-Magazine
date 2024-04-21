@@ -8,8 +8,8 @@
                     <h4 class="alert-heading">Event List</h4>
 
                     @if(isset(auth()->user()->role->permission['name']['event']['can-add']))
-                        <a href="{{ route('events.create') }}" type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 1.5rem; --bs-btn-font-size: .75rem;">
-                            Add Event
+                        <a href="{{ route('events.create') }}" type="button" class="btn btn-primary btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 1.5rem; --bs-btn-font-size: .75rem;">
+                            <i class="fa-solid fa-plus"></i>
                         </a>
                     @endif
 
@@ -20,81 +20,82 @@
                     </div>
                 @endif
 
-                <table class="table table-bordered" id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Faculty</th>
-                            <th>Start Date</th>
-                            <th>Final Date</th>
-                            <th>Delete</th>
-                            <th>Edit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($events as $key => $event)
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="datatablesSimple">
+                        <thead>
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                {{-- <td>{{ $event->title }}</td> --}}
-                                <td>
-                                    <a href="{{ route('contributions.create', [$event->id]) }}">
-                                        {{ $event->title }}
-                                    </a>
-                                </td>
-                                <td>{{ $event->description }}</td>
-                                <td>{{ $event->faculty->name ?? '' }}</td>
-                                <td>{{ $event->start_date }}</td>
-                                <td>{{ $event->final_date }}</td>
-
-                                <td>
-                                    @if(isset(auth()->user()->role->permission['name']['event']['can-delete']))
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $event->id }}">
-                                            <i class="fa-solid fa-trash-can"></i>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Faculty</th>
+                                <th>Start Date</th>
+                                <th>Final Date</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($events as $key => $event)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <a href="{{ route('contributions.create', [$event->id]) }}">
+                                            {{ $event->title }}
                                         </a>
-                                    @endif
-                                </td>
+                                    </td>
+                                    <td>{{ $event->description }}</td>
+                                    <td>{{ $event->faculty->name ?? '' }}</td>
+                                    <td>{{ $event->start_date }}</td>
+                                    <td>{{ $event->final_date }}</td>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal{{ $event->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <form action="{{ route('events.destroy', [$event->id]) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <td>
+                                        @if(isset(auth()->user()->role->permission['name']['event']['can-delete']))
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $event->id }}">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        @endif
+                                    </td>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal{{ $event->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <form action="{{ route('events.destroy', [$event->id]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete this event?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </div>
                                                 </div>
-                                                <div class="modal-body">
-                                                    Are you sure you want to delete this event?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <td>
-                                    @if(isset(auth()->user()->role->permission['name']['event']['can-edit']))
-                                        <a href="{{ route('events.edit', [$event->id]) }}">
-                                            <i class="fa-sharp fa-light fa-pen-to-square"></i>
-                                        </a>
-                                    @endif
-                                </td>
+                                    
+                                    <td>
+                                        @if(isset(auth()->user()->role->permission['name']['event']['can-edit']))
+                                            <a href="{{ route('events.edit', [$event->id]) }}">
+                                                <i class="fa-solid fa-edit"></i>
+                                            </a>
+                                        @endif
+                                    </td>
 
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="7">No events to display</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="8">No events to display</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

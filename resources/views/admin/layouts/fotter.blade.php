@@ -1,15 +1,11 @@
-<footer class="py-4 bg-light mt-auto">
+<footer class="py-4" style="background-color: #343f43;">
     <div class="container-fluid px-4">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-            <div>
-                <a href="#">Privacy Policy</a>
-                &middot;
-                <a href="#">Terms &amp; Conditions</a>
-            </div>
+            <div class="text-white">GROUP<sub>3</sub> COMP1640</div>
         </div>
     </div>
 </footer>
+
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
