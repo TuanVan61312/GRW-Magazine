@@ -131,8 +131,23 @@
                     </div>
                 </div>
 
+                 {{-- Folder Event --}}
+                 <div class="col-xl-3 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">Event
+                            <p><i class="fas fa-envelope" style="font-size:100px;"></i></p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="{{ route('events.index') }}" style="font-size:18px;">
+                                {{ App\Models\Event::where('faculty_id', $user->faculty->id)->count() }}
+                            </a>
+                            <div class="small text-white"></div>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Folder Contribution --}}
-                <div class="col-xl-3 col-md-6">
+                {{-- <div class="col-xl-3 col-md-6">
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-body">Contribution
                             <p><i class="fas fa-book" style="font-size:100px;"></i></p>
@@ -144,7 +159,7 @@
                             <div class="small text-white"></div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 @endif
 
             </div>
