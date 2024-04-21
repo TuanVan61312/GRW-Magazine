@@ -8,7 +8,7 @@
                     <h4 class="alert-heading">Event List</h4>
 
                     @if(isset(auth()->user()->role->permission['name']['event']['can-add']))
-                        <a href="{{ route('events.create') }}" type="button" class="btn btn-primary btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 1.5rem; --bs-btn-font-size: .75rem;">
+                        <a href="{{ route('events.create') }}" type="button" class="btn btn-primary btn-sm">
                             <i class="fa-solid fa-plus"></i>
                         </a>
                     @endif
