@@ -147,7 +147,7 @@
                 </div>
 
                 {{-- Folder Contribution --}}
-                {{-- <div class="col-xl-3 col-md-6">
+                <div class="col-xl-3 col-md-6">
                     <div class="card bg-danger text-white mb-4">
                         <div class="card-body">Contribution
                             <p><i class="fas fa-book" style="font-size:100px;"></i></p>
@@ -159,7 +159,7 @@
                             <div class="small text-white"></div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
                 @endif
 
             </div>

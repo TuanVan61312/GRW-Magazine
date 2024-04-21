@@ -104,10 +104,12 @@
                             </nav>
                         </div>
                         {{-- navbar Event --}}
+                        @if (isset(auth()->user()->role->permission['name']['event']['can-view']))
                         <a class="nav-link" href="{{ route('events.index') }}">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-meteor"></i></div>
                             Event
                         </a>
+                        @endif
                         {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseEvent" aria-expanded="false" aria-controls="collapseEvent">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-meteor"></i></i></div>
                             Event
@@ -121,10 +123,12 @@
                         </div> --}}
 
                         {{-- navbar Contribution --}}
+                        @if (isset(auth()->user()->role->permission['name']['contribution']['can-view']))
                         <a class="nav-link" href="{{ route('contributions.index') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Contribution
                         </a>
+                        @endif
                         {{-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseContribution" aria-expanded="false" aria-controls="collapseContribution">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Contribution
