@@ -34,7 +34,6 @@
                                 <th>Comment</th>
                             </tr>
                         </thead>
-
                         <tbody>
                             @if (count($contributions) > 0)
                                 @foreach ($contributions as $key => $con)
@@ -45,7 +44,16 @@
                                             <a href="{{ route('contributions.viewComments', [$con->id]) }}">{{ $con->title}} </a> 
                                         </td>
                                         <td> {{ $con->description }} </td>
-										<td> {{ $con->file }} </td>
+                                        {{-- succesfully --}}
+                                        {{-- <td>
+                                            <a href="{{ asset('storage/uploads/' . $con->file) }}" target="_blank">{{ $con->file }}</a><br>
+                                        </td> --}}
+                                        <td>
+                                            @foreach ($fileUrls[$con->id] as $url)
+                                                <a href="{{ $url }}" target="_blank">{{ basename($url) }}</a><br>
+                                            @endforeach
+                                        </td>
+
 										<td> {{ $con->submitted_on }} </td>
                                         <td> {{ $con->faculty->name ?? '' }} </td>
 										<td> {{ $con->event->title ?? '' }} </td>

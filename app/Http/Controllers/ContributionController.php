@@ -41,8 +41,28 @@ class ContributionController extends Controller
         foreach ($contributions as $contribution) {
             $contribution->submitted_on = Carbon::parse($contribution->submitted_on);
         }
+        
+        //succesfully
+        // $fileUrls = [];
+        // // $files = File::allFiles(('C:\xampp\htdocs\COMP1640\public\storage\uploads'));
+        // $files = File::allFiles(public_path('storage/uploads'));
+        // foreach ($contributions as $key => $contribution) {
+        //     $fileName = $contribution->file;
+        //         $checkFile = public_path('storage/uploads/' . $fileName);
+        //         if(!empty($checkFile)) {
+        //             $contributions[$key]['file_url'] = $checkFile;
+        //         }
+        // }
 
-        return view('admin.contribution.view', compact('contributions'));
+        // Separate each file into 1 cell
+        $fileUrls = [];
+        foreach ($contributions as $contribution) {
+            $fileNames = explode(',', $contribution->file);
+            foreach ($fileNames as $fileName) {
+                $fileUrls[$contribution->id][] = asset('storage/uploads/' . $fileName);
+            }
+        }
+        return view('admin.contribution.view', compact('contributions', 'fileUrls'))->with('success', 'Contribution created successfully');
 
     }
 
