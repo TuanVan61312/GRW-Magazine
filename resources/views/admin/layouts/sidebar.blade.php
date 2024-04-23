@@ -25,12 +25,13 @@
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 {{-- create permission faculty --}}
-                                {{-- @if (isset(auth()->user()->role->permission['name']['faculty']['can-add'])) --}}
+                                @if (isset(auth()->user()->role->permission['name']['faculty']['can-add']))
                                     <a class="nav-link" href="{{ route('facultys.create') }}">Create Faculty</a>
-                                {{-- @endif --}}
-                                {{-- @if (isset(auth()->user()->role->permission['name']['faculty']['can-view'])) --}}
+                                @endif
+
+                                @if (isset(auth()->user()->role->permission['name']['faculty']['can-view']))
                                     <a class="nav-link" href="{{ route('facultys.index') }}">View Faculty</a>
-                                {{-- @endif --}}
+                                @endif
                             </nav>
                         </div>
 
@@ -154,7 +155,7 @@
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                {{-- {{Auth::user()->role->name}} --}}
+                {{Auth::user()->role->name}}
             </div>
         </nav>
     </div>
