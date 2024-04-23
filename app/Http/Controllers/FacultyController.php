@@ -17,18 +17,19 @@ class FacultyController extends Controller
      */
     public function index()
     {
-        // Lấy id của user hiện tại
-        $userId = Auth::id();
-        //check user == admin 
-        $isAdmin = Auth::user()->isAdmin(); 
+        $faculty = Faculty::all(); 
+        // // Lấy id của user hiện tại
+        // $userId = Auth::id();
+        // //check user == admin 
+        // $isAdmin = Auth::user()->isAdmin(); 
 
-        // Lấy danh sách faculty tương ứng
-        if ($isAdmin) {
-            $faculty = Faculty::all(); 
-        } else {
-            $userFaculty = User::findOrFail($userId)->faculty; 
-            $faculty = Faculty::where('id', $userFaculty->id)->get(); 
-        }
+        // // Lấy danh sách faculty tương ứng
+        // if ($isAdmin) {
+        //     $faculty = Faculty::all(); 
+        // } else {
+        //     $userFaculty = User::findOrFail($userId)->faculty; 
+        //     $faculty = Faculty::where('id', $userFaculty->id)->get(); 
+        // }
 
         // $faculty = Faculty::all();
         return view('admin.faculty.view', compact('faculty'));
@@ -54,7 +55,7 @@ class FacultyController extends Controller
     {     
         $this->validate($request, [
             'name' => 'required', 
-            'role_id' => ['required'],
+            // 'role_id' => ['required'],
         ]);
         
         $data = $request->all();
