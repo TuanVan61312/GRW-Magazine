@@ -99,6 +99,12 @@ class ContributionController extends Controller
             'event_id' => 'required|integer',
         ]);
 
+        // Check if event has expired
+        $event = Event::findOrFail($validatedData['event_id']);
+        if ($event->hasExpired()) {
+            return redirect()->route('contributions.create')->with('error', 'The event is overdue. Cannot submit contribution.');
+        }
+
         $fileNames = []; //Initialize an array to store file names
         
         // Check if any files are uploaded

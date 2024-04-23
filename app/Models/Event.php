@@ -17,10 +17,15 @@ class Event extends Model
 
     public function hasExpired()
     {
-        // Lấy ngày kết thúc của sự kiện
         $final_date = Carbon::parse($this->final_date);
+        $grace_period = 1; 
+        $allowed_submission_date = $final_date->addDays($grace_period);
 
-        // So sánh ngày kết thúc với ngày hiện tại
-        return $final_date->isPast();
+        if (now()->greaterThan($allowed_submission_date)) {
+            $this->status = 'expired';
+            $this->save(); 
+            return true;
+        }
+        return false;
     }
 }

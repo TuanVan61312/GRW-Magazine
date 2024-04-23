@@ -19,7 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('faculty_id');
             $table->date('start_date');
-            $table->date('final_date');   
+            $table->date('final_date');
+            $table->string('status')->default('active');   
             $table->timestamps();
         });
     }

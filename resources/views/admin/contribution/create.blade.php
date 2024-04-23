@@ -17,6 +17,13 @@
             </div>
         @endif
         
+        {{-- error finaldate event --}}
+        @if (Session::has('error'))
+            <div class="alert alert-warning">
+                {{ Session::get('error') }}
+            </div>
+        @endif
+        
         <form action="{{ route('contributions.store')}}" method="post" enctype="multipart/form-data">@csrf
 
             <div class="row justify-content-center">
@@ -121,17 +128,8 @@
                                 </select>
                             </div>
 
-
-                            {{-- <div class="mt-4">
-                                <button class="btn btn-primary " type="submit">Submit</button> --> button cũ khong co điều khoản
-                            </div> --}}
-
                             <div class="mt-4">
-                                @if(!$event->hasExpired())
-                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmationModal">Submit</button>
-                                @else
-                                    <span class="text-danger">The event is overdue. Cannot submit assignment.</span>
-                                @endif
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmationModal">Submit</button>
                             </div>
                             {{-- Model Alert --}}
                             <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
