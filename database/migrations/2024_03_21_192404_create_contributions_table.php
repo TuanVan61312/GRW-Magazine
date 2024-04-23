@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('file');
             $table->date('submitted_on');
+            $table->string('status')->default('pending');
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
