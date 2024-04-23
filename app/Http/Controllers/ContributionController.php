@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ContributionController extends Controller
 {
@@ -75,6 +76,7 @@ class ContributionController extends Controller
     {
         return view('admin.contribution.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -154,7 +156,8 @@ class ContributionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contribution = Contribution::find($id);
+        return view('admin.contribution.edit', compact('contribution'));
     }
 
     /**
@@ -166,7 +169,45 @@ class ContributionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Lấy contribution từ cơ sở dữ liệu bằng ID
+        $contribution = Contribution::findOrFail($id);
+
+        // Validate the incoming request data for the fields you want to update
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:50',
+            'description' => 'required|string',
+            'file.*' => 'nullable|mimes:doc,docx,pdf,jpg,jpeg,png', // Thay đổi từ required thành nullable
+        ]);
+
+        // Kiểm tra xem có tệp nào được tải lên không
+        if ($request->hasFile('file')) {
+            $fileNames = []; // Khởi tạo một mảng để lưu trữ các tên tệp tin
+
+            $files = $request->file('file');
+        
+            foreach ($files as $file) {
+                // Tạo tên file mới với timestamp và đuôi mở rộng
+                $fileName = time() . '_' . $file->getClientOriginalName();
+
+                    // Lưu trữ file trong thư mục storage/app/public/uploads
+                $file->move(public_path('storage/uploads'), $fileName);
+
+                // Thêm tên file vào mảng fileNames
+                $fileNames[] = $fileName;
+            }
+
+            // Gán một chuỗi của các tên tệp tin cho trường file trong $validatedData
+            $validatedData['file'] = implode(',', $fileNames);
+       }
+
+       // Cập nhật chỉ các trường được yêu cầu
+       $contribution->fill($validatedData);
+
+       // Lưu thay đổi vào cơ sở dữ liệu
+       $contribution->save();
+
+       // Redirect đến trang chỉnh sửa với thông báo thành công
+       return redirect()->route('contributions.edit', $id)->with('success', 'Contribution updated successfully'); 
     }
 
     /**
@@ -277,5 +318,32 @@ class ContributionController extends Controller
         // Mail::to($email)->send(new SendMail());
 
         return view('admin.email.contact');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {   
+        $validator = Validator::make($request->all(), [
+            'status' => 'required|in:approved,rejected',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $contribution = Contribution::findOrFail($id);
+        // Lấy giá trị của trường status từ yêu cầu
+        $status = $request->status;
+
+        // Kiểm tra và cập nhật trạng thái của contribution
+        if ($status === 'approved') {
+            $contribution->status = Contribution::STATUS_APPROVED;
+        } elseif ($status === 'rejected') {
+            $contribution->status = Contribution::STATUS_REJECTED;
+        } else {
+            // Xử lý trường hợp không hợp lệ
+            return redirect()->back()->with('error', 'Invalid action');
+        }
+        // Lưu thay đổi
+        $contribution->save();
+
+        return redirect()->back()->with('success', 'Status updated successfully');
     }
 }

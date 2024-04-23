@@ -144,7 +144,10 @@ Route::group(['middleware' => ['auth', 'permission']],function(){
 
     //test mail
     Route::get('/contact',[ContributionController::class, 'contact'])->name('contribitions.contact');
-    
+    // contribution status
+    Route::put('/contributions/{id}/update-status', [ContributionController::class, 'updateStatus'])->name('contributions.updateStatus');
+
+
 });
 
 

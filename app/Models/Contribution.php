@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contribution extends Model
 {
+    const STATUS_PENDING = 'pending';
+    const STATUS_APPROVED = 'approved';
+    const STATUS_REJECTED = 'rejected';
+    
     protected $guarded = []; 
 
     public function user(){

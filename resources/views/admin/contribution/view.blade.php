@@ -32,7 +32,9 @@
                                     <th>File</th>
                                     <th>Submitted on</th>
                                     <th>Faculty</th>
-                                    <th>Event</th>                               
+                                    <th>Event</th>
+                                    <th>Status</th>
+                                    <th>Approve/Reject</th>                               
                                     <th>Delete</th>
                                     <th>Edit</th>
                                     <th>Download</th>
@@ -57,6 +59,26 @@
                                             <td> {{ $con->submitted_on }} </td>
                                             <td> {{ $con->faculty->name ?? '' }} </td>
                                             <td> {{ $con->event->title ?? '' }} </td>
+                                            <td>{{ ucfirst($con->status) }}</td>
+                                            <td>
+                                                <form action="{{ route('contributions.updateStatus', $con->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('PUT')                                            
+                                                    <select name="status" class="form-select">
+                                                        <option value="approved" {{ $con->status == 'approved' ? 'selected' : '' }}>Approved</option>
+                                                        <option value="rejected" {{ $con->status == 'rejected' ? 'selected' : '' }}>Rejected</option>
+                                                    </select>
+                                                    
+                                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                                </form>
+                                            </td>
+                                            {{-- <td>
+                                                @if ($con->status == 0)
+                                                    <span class="btn btn-outline-danger">pending</span>
+                                                @else
+                                                    <span class="btn btn-outline-success">Approved</span>
+                                                @endif
+                                            </td> --}}
                                             
                                             {{-- Function Delete --}}
                                             <td>
